@@ -8,7 +8,5 @@
 
 import {getReward} from "@/api/request";
 
-getReward().then(res=>{
-  console.log(res);
-})
+
 </script>
