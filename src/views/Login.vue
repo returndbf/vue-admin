@@ -13,13 +13,13 @@ const formLabelAlign = reactive({
 })
 
 const submitForm = async (formEl) => {
-  if (!formEl) return
-  console.log(formLabelAlign.password)
-  getReward().then(res=>{
-    console.log(res);
-  })
-   await store.commit("setToken", "token")
-   // await router.push("/about")
+  // if (!formEl) return
+  // console.log(formLabelAlign.password)
+  // getReward().then(res=>{
+  //   console.log(res);
+  // })
+  //  await store.commit("setToken", "token")
+   await router.push("/home")
 }
 const resetForm = (formEl) => {
   store.commit("addCount")
