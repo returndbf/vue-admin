@@ -13,7 +13,7 @@ API.interceptors.request.use(config=>{
 })
 API.interceptors.response.use(response=>{
   let res = response.data
-  if(res.code === 200){
+  if(res.code === 200 || res.code === 1){
     return res
   }else{
     // Promise.reject("error");

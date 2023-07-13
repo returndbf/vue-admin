@@ -2,50 +2,13 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <strong style="line-height: 50px">后台管理</strong>
-        <div class="header-avatar">
-          <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-          <span>
-              <el-dropdown>
-                <span class="el-dropdown-link">
-                  admin<el-icon class="el-icon--right"><arrow-down/></el-icon>
-                </span>
-                <template #dropdown>
-                  <el-dropdown-menu>
-                      <el-dropdown-item>个人中心</el-dropdown-item>
-                      <el-dropdown-item>退出登录</el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
-          </span>
-        </div>
+       <Header :userInfo = userInfo></Header>
       </el-header>
       <el-container>
-        <el-aside width="200px">
-          <el-menu
-              default-active="2"
-              class="el-menu-vertical-demo"
-              @open="handleOpen"
-              @close="handleClose"
-          >
-            <el-sub-menu index="1">
-              <template #title>
-                <el-icon><location /></el-icon>
-                <span>Navigator One</span>
-              </template>
-              <el-sub-menu index="1-4">
-                <template #title>item four</template>
-                <el-menu-item index="1-4-1">item one</el-menu-item>
-              </el-sub-menu>
-            </el-sub-menu>
-            <el-menu-item index="2">
-              <el-icon><icon-menu /></el-icon>
-              <span>Navigator Two</span>
-            </el-menu-item>
-
-          </el-menu>
-        </el-aside>
-        <el-main>Main</el-main>
+        <SideMenu/>
+        <el-main>
+          <RouterView/>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -60,6 +23,23 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 import {getReward} from "@/api/request";
+import SideMenu from "@/component/SideMenu.vue";
+import Header from "@/component/Header.vue";
+import Container from "@/component/Container.vue";
+import { reactive } from "vue";
+import { getUserInfoApi } from "@/api/user";
+
+const userInfo = reactive({
+  username:"aa",
+  id:"",
+  avatar:"",
+})
+
+const getUserInfo = () =>{
+    getUserInfoApi().then(res=>{
+      Object.assign(userInfo, res);
+    })
+}
 
 
 </script>
@@ -69,16 +49,8 @@ import {getReward} from "@/api/request";
   height: 100vh;
 }
 
-.header-avatar {
-  float: right;
-  display: flex;
-  width: 200px;
-  justify-content: space-around;
-  align-items: center;
-  height: 50px;
-}
 
-.el-header, .el-footer {
+.el-header{
   background-color: #B3C0D1;
   color: #333;
   text-align: center;
@@ -99,18 +71,7 @@ import {getReward} from "@/api/request";
   line-height: 160px;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
 
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
 
 .example-showcase .el-dropdown-link {
   cursor: pointer;

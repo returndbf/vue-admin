@@ -1,12 +1,44 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import Login from "@/views/Login.vue";
+import Container from "@/component/Container.vue";
+import User from "@/views/manager/User.vue";
+import Role from "@/views/manager/Role.vue";
+import Menu from "@/views/manager/Menu.vue";
+import UserCenter from "@/views/manager/UserCenter.vue";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: HomeView,
+    children: [{
+      path: "/index",
+      name: "index",
+      component: Container,
+    },
+      {
+        path: "/user",
+        name: "user",
+        component: User,
+      },
+      {
+        path: "/role",
+        name: "role",
+        component: Role,
+      },
+      {
+        path: "/menu",
+        name: "menu",
+        component: Menu,
+      },
+      {
+        path: "/userCenter",
+        name: "userCenter",
+        component: UserCenter,
+      }
+
+    ]
   },
   {
     path: "/login",
